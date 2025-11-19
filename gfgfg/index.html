@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D стиль — пример</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="page-center">
+        <div class="card">
+            <button id="kirillBtn" class="rainbow-btn">кирилл гей</button>
+        </div>
+    </main>
+
+    <script>
+        // для интерактивности: лёгкая вибрация при клике (если поддерживается)
+        const btn = document.getElementById('kirillBtn');
+        btn.addEventListener('click', () => {
+            if (navigator.vibrate) navigator.vibrate(30);
+        });
+    </script>
+</body>
+</html>

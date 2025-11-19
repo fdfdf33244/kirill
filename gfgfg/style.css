@@ -1,0 +1,83 @@
+/* Базовые стили для центрирования и фон с лёгким градиентом */
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; font-family: "Segoe UI", Roboto, Arial, sans-serif; background: #0f1724; }
+
+.page-center {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.card {
+  perspective: 900px; /* для 3D эффекта */
+  width: 100%;
+  max-width: 760px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  box-shadow: 0 10px 30px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+}
+
+/* Переливающаяся цветная кнопка */
+.rainbow-btn {
+  --pad-x: 36px;
+  --pad-y: 18px;
+  position: relative;
+  display: inline-block;
+  padding: var(--pad-y) var(--pad-x);
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(90deg, #ff3cac, #784ba0, #2b86c5, #2ecc71, #ffd700, #ff3cac);
+  background-size: 300% 100%;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  z-index: 1;
+  box-shadow: 0 8px 30px rgba(27,40,56,0.6), 0 2px 6px rgba(0,0,0,0.35);
+  transition: transform .18s cubic-bezier(.2,.9,.2,1), box-shadow .18s ease;
+  transform-style: preserve-3d;
+}
+
+.rainbow-btn::before {
+  /* мягкое сияние вокруг кнопки */
+  content: '';
+  position: absolute;
+  left: -8px; right: -8px; top: -8px; bottom: -8px;
+  z-index: -1;
+  filter: blur(18px) saturate(120%);
+  opacity: .85;
+  background: inherit;
+  background-size: 300% 100%;
+  border-radius: 18px;
+  transition: opacity .25s ease;
+}
+
+/* анимация градиента */
+@keyframes rainbowShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.rainbow-btn { animation: rainbowShift 6s ease infinite; }
+.rainbow-btn::before { animation: rainbowShift 6s ease infinite; }
+
+.rainbow-btn:hover { transform: translateY(-6px) rotateX(6deg) scale(1.02); box-shadow: 0 16px 40px rgba(27,40,56,0.65); }
+.rainbow-btn:active { transform: translateY(-2px) rotateX(2deg) scale(.998); }
+
+/* адаптация под небольшие экраны */
+@media (max-width: 520px) {
+  .rainbow-btn { font-size: 18px; --pad-x: 28px; --pad-y: 14px; border-radius: 12px; }
+  .card { padding: 16px; max-width: 420px; }
+}
+
+/* небольшая 3D-подвижность по движению мыши */
+.card:hover {
+  transform: translateZ(8px) rotateX(0deg);
+}
